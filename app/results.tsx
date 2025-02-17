@@ -14,6 +14,7 @@ import * as FileSystem from "expo-file-system";
 import * as Sharing from "expo-sharing";
 import * as XLSX from "xlsx";
 import { saveAs } from "file-saver"; 
+import { SafeAreaView } from "react-native-safe-area-context";
 
 export default function ResultsScreen() {
   const { data } = useLocalSearchParams();
@@ -132,10 +133,16 @@ export default function ResultsScreen() {
   };
 
   return (
-    <ScrollView style={styles.container}>
+   
+      <View style={styles.outerContainer}>
+    <ScrollView style={styles.container} contentContainerStyle={{justifyContent:"center",marginTop:80}}>
+      <View style={styles.tableContainer}>
+      <View style={{display:'flex' , flexDirection:'row' ,justifyContent:'flex-start' , padding:10}}>
       <Text style={styles.title}>Results</Text>
+
+      </View>
       <ScrollView horizontal>
-        <View>
+        <View> 
           <View style={styles.row}>
             <Text style={styles.header}>Length</Text>
             <Text style={styles.header}>Width</Text>
@@ -156,8 +163,12 @@ export default function ResultsScreen() {
           ))}
         </View>
       </ScrollView>
-      <Button title="Download as Excel" onPress={generateExcel} />
+      </View>
+      <View style={styles.downloadButton}>
+      <Button title="Download as Excel" onPress={generateExcel} color="#f4247c" />
+      </View>
     </ScrollView>
+    </View>
   );
 }
 
@@ -165,18 +176,34 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     padding: 20,
-    backgroundColor: "#f8f8f8",
+    
+    
+  },
+  tableContainer:{
+    backgroundColor:'rgba(179, 81, 122,0.6)',
+    borderRadius:10,
+    marginBottom:20
+    
+    
+  },
+  downloadButton:{
+    width:'100%',
+    borderRadius:10,
+    display:'flex',
+    flexDirection:'row',
+    justifyContent:'flex-end'
   },
   title: {
     fontSize: 20,
     fontWeight: "bold",
     marginBottom: 10,
     textAlign: "center",
+    color:"white"
   },
   row: {
     flexDirection: "row",
     borderBottomWidth: 1,
-    borderColor: "#ddd",
+    borderColor: "#C1C1C16B",
     paddingVertical: 8,
   },
   header: {
@@ -190,5 +217,13 @@ const styles = StyleSheet.create({
     flex: 1,
     padding: 8,
     textAlign: "center",
+    color:"white"
   },
+  outerContainer:{
+    backgroundColor:"#181A20",
+    display:'flex',
+    justifyContent:"center",
+    height:"100%",
+    width:"100%"
+  }
 });

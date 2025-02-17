@@ -1,8 +1,10 @@
 import React from "react";
-import { View, Button, Alert } from "react-native";
+import { View, Button, Alert ,Image ,StyleSheet ,Text} from "react-native";
 import * as DocumentPicker from "expo-document-picker";
 import * as XLSX from "xlsx";
 import { useRouter } from "expo-router";
+import uploadimg from "../assets/images/pic.png";
+import topSide from "../assets/images/bg2.png"
 
 export default function UploadScreen() {
   const router = useRouter();
@@ -71,8 +73,44 @@ export default function UploadScreen() {
   };
 
   return (
-    <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
-      <Button title="Upload Excel File" onPress={pickFile} />
+    <View style={{ flex: 1, justifyContent: "space-between", alignItems: "center",backgroundColor:"#292D32" ,height:'100%'}}>
+      <View style={styles.topContainer}>
+        <Image source={topSide}  style={styles.image1}/>
+        <Image source={uploadimg} style={styles.image2} />
+
+      </View>
+      <View  style={{marginBottom:50 , width:'80%'}}>
+        <Text style={styles.txt}>Upload an Excel sheet containing product measurements(Length, Width, Error)
+           to process and determine acceptance status based on expected values .</Text>
+      <Button title="Upload Excel File" onPress={pickFile} color="#f4247c"/>
+      </View>
     </View>
   );
 }
+const styles = StyleSheet.create({
+  topContainer:{
+    position:'relative' ,
+    width:'100%',
+    height:'50%'
+  },
+  image1:{
+    position:'absolute',
+    width:'100%',
+    top:0,
+    left:0,
+    right:0
+    
+  },
+  txt:{
+    color:"white",
+    fontSize:12,
+    textAlign:'center',
+    marginBottom:15
+  },
+  image2:{
+    position:'absolute',
+    top:'40%',
+    left:'20%'
+  }
+
+}) 
